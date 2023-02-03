@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CharacterListAdapter(private val listener:CharactersClicked): RecyclerView.Adapter<CharacterViewHolder>() {
 
-    private val items: ArrayList<Character> = ArrayList()
+    private val items: ArrayList<com.example.maratachallenge.Character> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val view = LayoutInflater
@@ -16,7 +16,7 @@ class CharacterListAdapter(private val listener:CharactersClicked): RecyclerView
             .inflate(R.layout.item_character, parent, false)
         val viewHolder = CharacterViewHolder(view)
         view.setOnClickListener{
-            listener.onItemClicked(items[viewHolder.adapterPosition])
+           listener.onItemClicked(items[viewHolder.adapterPosition])
         }
         return viewHolder
     }
@@ -24,6 +24,7 @@ class CharacterListAdapter(private val listener:CharactersClicked): RecyclerView
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         var currentItem = items[position]
         holder.nameView.text = currentItem.name
+
     }
 
     override fun getItemCount(): Int {
@@ -33,6 +34,8 @@ class CharacterListAdapter(private val listener:CharactersClicked): RecyclerView
     fun updateCharacter(updateCharacter: ArrayList<Character>) {
         items.clear()
         items.addAll(updateCharacter)
+
+        notifyDataSetChanged()
     }
 
 }
@@ -42,5 +45,5 @@ class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 }
 
 interface CharactersClicked {
-    fun onItemClicked(item: Character)
+    fun onItemClicked(item: com.example.maratachallenge.Character)
 }
