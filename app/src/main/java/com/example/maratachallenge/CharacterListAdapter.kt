@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CharacterListAdapter(private val items: ArrayList<String>, private val listener:CharactersClicked): RecyclerView.Adapter<CharacterViewHolder>() {
+class CharacterListAdapter(private val listener:CharactersClicked): RecyclerView.Adapter<CharacterViewHolder>() {
+
+    private val items: ArrayList<Character> = ArrayList()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val view = LayoutInflater
             .from(parent.context)
@@ -20,11 +23,16 @@ class CharacterListAdapter(private val items: ArrayList<String>, private val lis
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         var currentItem = items[position]
-        holder.nameView.text = currentItem
+        holder.nameView.text = currentItem.name
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun updateCharacter(updateCharacter: ArrayList<Character>) {
+        items.clear()
+        items.addAll(updateCharacter)
     }
 
 }
@@ -34,5 +42,5 @@ class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 }
 
 interface CharactersClicked {
-    fun onItemClicked(item: String)
+    fun onItemClicked(item: Character)
 }

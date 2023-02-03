@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity(), CharactersClicked {
@@ -20,13 +24,37 @@ class MainActivity : AppCompatActivity(), CharactersClicked {
         recyclerView.adapter = adapter
     }
 
-    private fun fetchData(): ArrayList<String> {
-        val list = ArrayList<String>()
-        for (i in 0 until 100) {
-            list.add("Item $i")
-        }
+    private fun fetchData() {
+        val url = "https://swapi.dev/api/people"
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener {
+                val characterJsonArray = it.getJSONArray("results")
+                val characterArray = ArrayList<Character>()
+                for (i in 0 until characterJsonArray.length()) {
+                    val charactersJsonObject = characterJsonArray.getJSONObject(i)
+                    val character = Character(
+                        charactersJsonObject.getString("name"),
+                        charactersJsonObject.getString("height"),
+                        charactersJsonObject.getString("mass"),
+                        charactersJsonObject.getString("hair_color"),
+                        charactersJsonObject.getString("skin_color"),
+                        charactersJsonObject.getString("eye_color"),
+                        charactersJsonObject.getString("birth_year"),
+                        charactersJsonObject.getString("gender"),
+                        charactersJsonObject.getString("homeworld"),
+                        charactersJsonObject.getString("species"),
+                    )
+                    characterArray.add(character)
+                }
+            },
+            Response.ErrorListener {
 
-        return list
+            }
+        )
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
 
     override fun onItemClicked(item: String) {
