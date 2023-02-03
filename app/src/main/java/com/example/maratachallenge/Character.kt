@@ -10,5 +10,5 @@ data class Character (
     val birth_year: String? = null,
     val gender: String? = null,
     val homeworld: String? = null,
-    val species: String? = null,
+    val species: String? = null
 )

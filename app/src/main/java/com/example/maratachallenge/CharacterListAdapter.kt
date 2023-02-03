@@ -24,7 +24,9 @@ class CharacterListAdapter(private val listener:CharactersClicked): RecyclerView
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         var currentItem = items[position]
         holder.nameView.text = currentItem.name
-
+        holder.heightView.text = "height: " + currentItem.height + " cm"
+        holder.genderView.text = "gender: " + currentItem.gender
+        holder.massView.text = "mass: " + currentItem.mass + " pounds"
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +44,9 @@ class CharacterListAdapter(private val listener:CharactersClicked): RecyclerView
 
 class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val nameView: TextView = itemView.findViewById(R.id.name)
+    val heightView: TextView = itemView.findViewById(R.id.height)
+    val genderView: TextView = itemView.findViewById(R.id.gender)
+    val massView: TextView = itemView.findViewById(R.id.mass)
 }
 
 interface CharactersClicked {
