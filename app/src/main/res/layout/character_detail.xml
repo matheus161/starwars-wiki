@@ -40,7 +40,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/height"
+                    android:id="@+id/detailActivityHeight"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/mass"
+                    android:id="@+id/detailActivityMass"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/hair_color"
+                    android:id="@+id/detailActivityHairColor"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/skin_color"
+                    android:id="@+id/detailActivitySkinColor"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/eye_color"
+                    android:id="@+id/detailActivityEyeColor"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/birth_year"
+                    android:id="@+id/detailActivityBirthYear"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/gender"
+                    android:id="@+id/detailActivityGender"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/homeworld"
+                    android:id="@+id/detailActivityHomeWorld"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/specie"
+                    android:id="@+id/detailActivitySpecie"
                     android:text="166"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"

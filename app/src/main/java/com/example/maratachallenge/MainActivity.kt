@@ -10,7 +10,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 
 
-class MainActivity : AppCompatActivity(), CharactersClicked {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mAdapter: CharacterListAdapter
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), CharactersClicked {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         fetchData()
-        mAdapter = CharacterListAdapter(this)
+        mAdapter = CharacterListAdapter()
         recyclerView.adapter = mAdapter
     }
 
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), CharactersClicked {
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
 
-    override fun onItemClicked(item: com.example.maratachallenge.Character) {
+    //override fun onItemClicked(item: com.example.maratachallenge.Character) {
 
-    }
+    //}
 }

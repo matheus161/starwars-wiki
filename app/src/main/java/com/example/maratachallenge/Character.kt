@@ -1,5 +1,12 @@
 package com.example.maratachallenge
 
+import android.os.Parcel
+import android.os.Parcelable
+
+/*
+* Parceble class: Allows send data between Activities
+* */
+
 data class Character (
     val name : String? = null,
     val height : String? = null,
@@ -11,4 +18,45 @@ data class Character (
     val gender: String? = null,
     val homeworld: String? = null,
     val specie: String? = null
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(height)
+        parcel.writeString(mass)
+        parcel.writeString(hair_color)
+        parcel.writeString(skin_color)
+        parcel.writeString(eye_color)
+        parcel.writeString(birth_year)
+        parcel.writeString(gender)
+        parcel.writeString(homeworld)
+        parcel.writeString(specie)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Character> {
+        override fun createFromParcel(parcel: Parcel): Character {
+            return Character(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Character?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
