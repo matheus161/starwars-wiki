@@ -31,8 +31,8 @@ class CharacterListAdapter(): RecyclerView.Adapter<CharacterViewHolder>() {
         holder.genderView.text = "gender: " + currentItem.gender
         holder.massView.text = "mass: " + currentItem.mass + " pounds"
 
-        val context = holder.constraint_row.context
-        holder.constraint_row.setOnClickListener {
+        val context = holder.constraintRow.context
+        holder.constraintRow.setOnClickListener {
             val intent = Intent(it.context, CharacterDetailActivity::class.java)
 
             intent.putExtra("character", currentItem)
@@ -60,7 +60,7 @@ class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val heightView: TextView = itemView.findViewById(R.id.height)
     val genderView: TextView = itemView.findViewById(R.id.gender)
     val massView: TextView = itemView.findViewById(R.id.mass)
-    val constraint_row: ConstraintLayout = itemView.findViewById(R.id.constraint_row)
+    val constraintRow: ConstraintLayout = itemView.findViewById(R.id.constraint_row)
 }
 
 //interface CharactersClicked {

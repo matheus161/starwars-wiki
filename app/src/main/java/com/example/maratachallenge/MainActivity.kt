@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -13,6 +14,8 @@ import com.android.volley.toolbox.JsonObjectRequest
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAdapter: CharacterListAdapter
+    private var page = 1
+    private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +24,31 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.rv_characteres)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        fetchData()
+        //fetchData()
         mAdapter = CharacterListAdapter()
         recyclerView.adapter = mAdapter
+
+        // Infinite Scroll method
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val visibleItemCount = recyclerView.childCount
+                val totalItemCount = recyclerView.layoutManager!!.itemCount
+                val firstVisibleItem = (recyclerView.layoutManager as LinearLayoutManager)
+                    .findFirstVisibleItemPosition()
+
+                if (!isLoading && firstVisibleItem + visibleItemCount >= totalItemCount) {
+                    isLoading = true
+                    fetchData()
+                }
+            }
+        })
+        fetchData()
     }
 
     private fun fetchData() {
-        val url = "https://swapi.dev/api/people"
+        val url = "https://swapi.dev/api/people?page=$page"
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
             url,
@@ -50,12 +71,13 @@ class MainActivity : AppCompatActivity() {
                         charactersJsonObject.getString("species"),
                     )
                     characterArray.add(character)
+                    page++
+                    isLoading=false
                 }
-
                 mAdapter.updateCharacter(characterArray)
             },
             Response.ErrorListener {
-
+                isLoading = false
             }
         )
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
