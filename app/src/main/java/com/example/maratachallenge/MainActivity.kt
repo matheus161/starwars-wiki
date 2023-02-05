@@ -3,9 +3,11 @@ package com.example.maratachallenge
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -14,40 +16,41 @@ import com.android.volley.toolbox.JsonObjectRequest
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAdapter: CharacterListAdapter
-    private var page = 1
-    private var isLoading = false
+    val characterArray = ArrayList<Character>()
+    var isLoading = false
+    var page = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv_characteres)
+        val progressBar = findViewById<ProgressBar>(R.id.progress)
+        val layoutManager = LinearLayoutManager(this)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        //fetchData()
+        recyclerView.layoutManager = layoutManager
+        fetchData()
         mAdapter = CharacterListAdapter()
         recyclerView.adapter = mAdapter
 
-        // Infinite Scroll method
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount: Int = layoutManager.childCount
+                val pasVisibleItem: Int = layoutManager.findFirstCompletelyVisibleItemPosition()
+                val totalItems = mAdapter.itemCount
 
-                val visibleItemCount = recyclerView.childCount
-                val totalItemCount = recyclerView.layoutManager!!.itemCount
-                val firstVisibleItem = (recyclerView.layoutManager as LinearLayoutManager)
-                    .findFirstVisibleItemPosition()
-
-                if (!isLoading && firstVisibleItem + visibleItemCount >= totalItemCount) {
-                    isLoading = true
-                    fetchData()
+                if(!isLoading) {
+                    if(visibleItemCount + pasVisibleItem >= totalItems) {
+                        fetchData()
+                    }
                 }
+                super.onScrolled(recyclerView, dx, dy)
             }
         })
-        fetchData()
     }
 
     private fun fetchData() {
+        isLoading = true
         val url = "https://swapi.dev/api/people?page=$page"
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -55,7 +58,6 @@ class MainActivity : AppCompatActivity() {
             null,
             Response.Listener {
                 val characterJsonArray = it.getJSONArray("results")
-                val characterArray = ArrayList<Character>()
                 for (i in 0 until characterJsonArray.length()) {
                     val charactersJsonObject = characterJsonArray.getJSONObject(i)
                     val character = com.example.maratachallenge.Character(
@@ -71,13 +73,14 @@ class MainActivity : AppCompatActivity() {
                         charactersJsonObject.getString("species"),
                     )
                     characterArray.add(character)
-                    page++
-                    isLoading=false
+                    mAdapter.notifyDataSetChanged()
                 }
                 mAdapter.updateCharacter(characterArray)
+                isLoading = false
+                page++
             },
             Response.ErrorListener {
-                isLoading = false
+
             }
         )
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
