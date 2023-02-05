@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:queryHint="Digite o nome do personagem"

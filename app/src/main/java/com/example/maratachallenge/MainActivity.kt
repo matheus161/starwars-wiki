@@ -1,21 +1,27 @@
 package com.example.maratachallenge
 
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ProgressBar
+import androidx.appcompat.widget.SearchView
+import android.widget.Toast
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAdapter: CharacterListAdapter
+    private lateinit var searchView2: SearchView
     val characterArray = ArrayList<Character>()
     var isLoading = false
     var page = 1
@@ -25,13 +31,43 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv_characteres)
-        val progressBar = findViewById<ProgressBar>(R.id.progress)
+        val searchView = findViewById<SearchView>(R.id.search)
         val layoutManager = LinearLayoutManager(this)
 
         recyclerView.layoutManager = layoutManager
         fetchData()
         mAdapter = CharacterListAdapter()
         recyclerView.adapter = mAdapter
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val searchList = ArrayList<com.example.maratachallenge.Character>()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+
+                if (newText != null) {
+                    for (i in characterArray) {
+                        if (i.name!!.lowercase(Locale.getDefault()).contains(searchText)) {
+                            searchList.add(i)
+                        }
+                    }
+                    if (searchList.isEmpty()) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Nenhum nome correspondente foi encontrado",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        mAdapter.updateCharacter(searchList)
+                        //isLoading = true
+                    }
+                }
+                return true
+            }
+        })
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -46,7 +82,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 super.onScrolled(recyclerView, dx, dy)
             }
+
         })
+
     }
 
     private fun fetchData() {
@@ -73,7 +111,6 @@ class MainActivity : AppCompatActivity() {
                         charactersJsonObject.getString("species"),
                     )
                     characterArray.add(character)
-                    mAdapter.notifyDataSetChanged()
                 }
                 mAdapter.updateCharacter(characterArray)
                 isLoading = false
