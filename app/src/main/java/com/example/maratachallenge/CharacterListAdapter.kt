@@ -52,7 +52,6 @@ class CharacterListAdapter(): RecyclerView.Adapter<CharacterViewHolder>() {
 
         notifyDataSetChanged()
     }
-
 }
 
 class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

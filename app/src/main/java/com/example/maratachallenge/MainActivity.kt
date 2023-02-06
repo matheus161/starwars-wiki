@@ -2,13 +2,9 @@ package com.example.maratachallenge
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
-import android.view.View
-import android.widget.ProgressBar
+import android.text.method.TextKeyListener.clear
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
-import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -60,9 +56,10 @@ class MainActivity : AppCompatActivity() {
                             "Nenhum nome correspondente foi encontrado",
                             Toast.LENGTH_LONG
                         ).show()
+                        searchList.clear()
+                        mAdapter.updateCharacter(searchList)
                     } else {
                         mAdapter.updateCharacter(searchList)
-                        //isLoading = true
                     }
                 }
                 return true
@@ -71,12 +68,10 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val visibleItemCount: Int = layoutManager.childCount
-                val pasVisibleItem: Int = layoutManager.findFirstCompletelyVisibleItemPosition()
-                val totalItems = mAdapter.itemCount
+                val height = recyclerView.height
 
                 if(!isLoading) {
-                    if(visibleItemCount + pasVisibleItem >= totalItems) {
+                    if ((height - dy) < 1000) {
                         fetchData()
                     }
                 }
