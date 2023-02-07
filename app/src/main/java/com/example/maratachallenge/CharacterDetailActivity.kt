@@ -17,7 +17,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         val character = intent.getParcelableExtra<com.example.maratachallenge.Character>("character")
         val urlHomeWorld = character!!.homeworld
-
+        val urlSpecie = character!!.specie
         if(character != null) {
             val name : TextView = findViewById(R.id.detailActivityName)
             val height : TextView = findViewById(R.id.detailActivityHeight)
@@ -31,7 +31,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             val specie : TextView = findViewById(R.id.detailActivitySpecie)
 
             // Requisição da Home World
-            val jsonObjectRequest = JsonObjectRequest(
+            val jsonObjectRequestHomeWorld = JsonObjectRequest(
                 Request.Method.GET,
                 urlHomeWorld,
                 null,
@@ -43,7 +43,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                 }
 
             )
-            MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
+            MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequestHomeWorld)
 
             name.text = character.name
             height.text = character.height
@@ -53,8 +53,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             eyeColor.text = character.eye_color
             birthYear.text = character.birth_year
             gender.text = character.gender
-            //homeWorld.text = character.homeworld
-            specie.text = character.specie
+            //specie.text = character.specie
         }
     }
 }

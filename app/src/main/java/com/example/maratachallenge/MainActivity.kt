@@ -3,6 +3,7 @@ package com.example.maratachallenge
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.TextKeyListener.clear
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
