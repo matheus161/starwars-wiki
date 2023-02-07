@@ -1,67 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraint_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginLeft="6dp"
-    android:layout_marginRight="6dp"
-    android:layout_marginBottom="6dp"
-    android:background="#F2F0F4">
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="8dp">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toTopOf="parent"
-        android:gravity="center"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:id="@+id/constraint_row">
 
-    <TextView
-        android:id="@+id/height"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        android:layout_marginTop="6dp"
-        android:textSize="16sp"
-        android:gravity="center"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#FFEB3B"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Luke Skywalker"/>
 
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="0dp"
-        android:textColor="@android:color/black"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/height"
-        android:layout_marginTop="6dp"
-        android:textSize="16sp"
-        android:gravity="center"/>
+        <CheckBox
+            android:id="@+id/cb_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_favorite_item"
+            app:useMaterialThemeColors="false"
+            app:layout_constraintBottom_toBottomOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/name"/>
 
-    <TextView
-        android:id="@+id/mass"
-        android:layout_width="0dp"
-        android:textColor="@android:color/black"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gender"
-        android:layout_marginTop="6dp"
-        android:textSize="16sp"
-        android:gravity="center"/>
+        <TextView
+            android:id="@+id/height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="2sp"
+            app:layout_constraintLeft_toLeftOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="188" />
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="2sp"
+            app:layout_constraintLeft_toLeftOf="@+id/height"
+            app:layout_constraintTop_toBottomOf="@+id/height"
+            tools:text="male" />
+
+        <TextView
+            android:id="@+id/mass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="2sp"
+            app:layout_constraintLeft_toLeftOf="@+id/gender"
+            app:layout_constraintTop_toBottomOf="@+id/gender"
+            tools:text="188" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

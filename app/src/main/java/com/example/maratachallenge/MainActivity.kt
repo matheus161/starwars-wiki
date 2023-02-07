@@ -1,11 +1,12 @@
 package com.example.maratachallenge
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
 import android.util.Log
-import android.view.View
-import android.widget.ProgressBar
+import android.widget.Button
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -27,9 +29,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //supportActionBar?.hide()
+        supportActionBar?.title = "StarWars Characters";
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#000000")))
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv_characteres)
         val searchView = findViewById<SearchView>(R.id.search)
+        val fabFavorite = findViewById<FloatingActionButton>(R.id.fab_favorite)
         val layoutManager = LinearLayoutManager(this)
 
         recyclerView.layoutManager = layoutManager
@@ -88,6 +94,9 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        fabFavorite.setOnClickListener{
+            openFavoriteActivity()
+        }
     }
 
     private fun fetchData() {
@@ -123,6 +132,20 @@ class MainActivity : AppCompatActivity() {
             }
         )
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
+    }
+
+    private fun openFavoriteActivity() {
+        val intent = Intent(this, FavoriteCharacterActicity::class.java)
+        val favoriteArray = ArrayList<Character>()
+
+        for (i in 0 until characterArray.size) {
+            if (characterArray[i].isFavorite == true) {
+                favoriteArray.add(characterArray[i])
+            }
+        }
+
+        intent.putParcelableArrayListExtra("characterArray", favoriteArray)
+        startActivity(intent)
     }
 
     //override fun onItemClicked(item: com.example.maratachallenge.Character) {

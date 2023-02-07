@@ -4,38 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/constraint_layout">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="15sp"
+        android:layout_marginLeft="1sp"
         android:layout_marginBottom="8dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:backgroundTint="#090A0F"
+        app:hintEnabled="false">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="Digite o nome do personagem"
-            app:iconifiedByDefault="false"/>
-
+            android:background="@drawable/searchbar_backgroud"
+            app:queryHint="Type Your Character Name..."
+            app:iconifiedByDefault="false"
+            android:textColorHint="@color/light_gray" />
     </androidx.cardview.widget.CardView>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_characteres"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_marginTop="60dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
-</ScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_characteres"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="60dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </ScrollView>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:padding="1dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_heart_filled"
+                app:useMaterialThemeColors="false"
+                app:layout_anchorGravity="bottom|center"
+                android:layout_gravity="center"
+                app:useCompatPadding="true"
+                android:backgroundTint="@color/white"
+                app:borderWidth="0dp"/>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

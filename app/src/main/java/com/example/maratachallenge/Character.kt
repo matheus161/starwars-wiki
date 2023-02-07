@@ -17,8 +17,8 @@ data class Character (
     val birth_year: String? = null,
     val gender: String? = null,
     var homeworld: String? = null,
-    val specie: String? = null
-    //Coloca um campo isFavorite para saber se é favorito e alterar o botão
+    val specie: String? = null,
+    var isFavorite: Boolean? = false
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -30,7 +30,8 @@ data class Character (
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean
     ) {
     }
 
@@ -45,6 +46,7 @@ data class Character (
         parcel.writeString(gender)
         parcel.writeString(homeworld)
         parcel.writeString(specie)
+        parcel.writeValue(isFavorite)
     }
 
     override fun describeContents(): Int {
@@ -60,4 +62,5 @@ data class Character (
             return arrayOfNulls(size)
         }
     }
+
 }

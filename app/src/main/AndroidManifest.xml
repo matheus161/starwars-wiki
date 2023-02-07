@@ -15,6 +15,20 @@
         android:theme="@style/Theme.MarataChallenge"
         tools:targetApi="31">
         <activity
+            android:name=".FavoriteCharacterActicity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FavoriteCharacterActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CharacterDetailActivity"
             android:exported="false">
             <meta-data

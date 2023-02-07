@@ -1,11 +1,12 @@
 package com.example.maratachallenge
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,9 +19,7 @@ class CharacterListAdapter(): RecyclerView.Adapter<CharacterViewHolder>() {
             .from(parent.context)
             .inflate(R.layout.item_character, parent, false)
         val viewHolder = CharacterViewHolder(view)
-        //view.setOnClickListener{
-        //   listener.onItemClicked(items[viewHolder.adapterPosition])
-        //}
+
         return viewHolder
     }
 
@@ -30,8 +29,19 @@ class CharacterListAdapter(): RecyclerView.Adapter<CharacterViewHolder>() {
         holder.heightView.text = "height: " + currentItem.height + " cm"
         holder.genderView.text = "gender: " + currentItem.gender
         holder.massView.text = "mass: " + currentItem.mass + " pounds"
-        //Checo se é favorito e deixo o botão preenchido
 
+        //Fill favorite attribute
+        holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                currentItem.isFavorite = true
+                notifyDataSetChanged()
+            } else {
+                currentItem.isFavorite = false
+                notifyDataSetChanged()
+            }
+        }
+
+        //Send info to other Activity
         val context = holder.constraintRow.context
         holder.constraintRow.setOnClickListener {
             val intent = Intent(it.context, CharacterDetailActivity::class.java)
@@ -61,6 +71,7 @@ class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val genderView: TextView = itemView.findViewById(R.id.gender)
     val massView: TextView = itemView.findViewById(R.id.mass)
     val constraintRow: ConstraintLayout = itemView.findViewById(R.id.constraint_row)
+    val checkBox: CheckBox = itemView.findViewById(R.id.cb_heart)
 }
 
 //interface CharactersClicked {

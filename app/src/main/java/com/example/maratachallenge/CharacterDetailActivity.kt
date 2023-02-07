@@ -14,6 +14,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.character_detail)
+        supportActionBar?.hide()
 
         val character = intent.getParcelableExtra<com.example.maratachallenge.Character>("character")
         val urlHomeWorld = character!!.homeworld
