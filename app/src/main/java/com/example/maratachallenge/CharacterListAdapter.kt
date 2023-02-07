@@ -30,6 +30,7 @@ class CharacterListAdapter(): RecyclerView.Adapter<CharacterViewHolder>() {
         holder.heightView.text = "height: " + currentItem.height + " cm"
         holder.genderView.text = "gender: " + currentItem.gender
         holder.massView.text = "mass: " + currentItem.mass + " pounds"
+        //Checo se é favorito e deixo o botão preenchido
 
         val context = holder.constraintRow.context
         holder.constraintRow.setOnClickListener {

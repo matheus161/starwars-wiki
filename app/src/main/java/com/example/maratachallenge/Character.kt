@@ -16,8 +16,9 @@ data class Character (
     val eye_color: String? = null,
     val birth_year: String? = null,
     val gender: String? = null,
-    val homeworld: String? = null,
+    var homeworld: String? = null,
     val specie: String? = null
+    //Coloca um campo isFavorite para saber se é favorito e alterar o botão
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),

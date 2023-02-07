@@ -3,6 +3,8 @@ package com.example.maratachallenge
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.TextKeyListener.clear
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,6 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAdapter: CharacterListAdapter
-    private lateinit var searchView2: SearchView
     val characterArray = ArrayList<Character>()
     var isLoading = false
     var page = 1
@@ -68,11 +69,17 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val height = recyclerView.height
 
-                if(!isLoading) {
-                    if ((height - dy) < 1000) {
-                        fetchData()
+                if (dy > 0) {
+                    val visibleItemCount = layoutManager.childCount
+                    val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+                    val totalItems = mAdapter.itemCount
+
+                    if (!isLoading) {
+                        if((visibleItemCount + pastVisibleItem) >= totalItems) {
+                            page++
+                            fetchData()
+                        }
                     }
                 }
                 super.onScrolled(recyclerView, dx, dy)
@@ -109,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 mAdapter.updateCharacter(characterArray)
                 isLoading = false
-                page++
             },
             Response.ErrorListener {
 
