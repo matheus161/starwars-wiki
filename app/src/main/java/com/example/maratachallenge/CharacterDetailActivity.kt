@@ -1,9 +1,12 @@
 package com.example.maratachallenge
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -14,7 +17,9 @@ class CharacterDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.character_detail)
-        supportActionBar?.hide()
+        supportActionBar?.title = "Character Detail"
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#00FFFFFF")))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val character = intent.getParcelableExtra<com.example.maratachallenge.Character>("character")
         val urlHomeWorld = character!!.homeworld
@@ -56,4 +61,13 @@ class CharacterDetailActivity : AppCompatActivity() {
             //specie.text = character.specie
         }
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

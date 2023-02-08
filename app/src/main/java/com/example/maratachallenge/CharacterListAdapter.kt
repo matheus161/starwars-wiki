@@ -67,7 +67,3 @@ class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val constraintRow: ConstraintLayout = itemView.findViewById(R.id.constraint_row)
     val checkBox: CheckBox = itemView.findViewById(R.id.cb_heart)
 }
-
-//interface CharactersClicked {
-//    fun onItemClicked(item: com.example.maratachallenge.Character)
-//}

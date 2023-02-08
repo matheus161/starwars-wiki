@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.title = "StarWars Characters";
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#000000")))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#00FFFFFF")))
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv_characteres)
         val searchView = findViewById<SearchView>(R.id.search)
@@ -147,7 +147,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    //override fun onItemClicked(item: com.example.maratachallenge.Character) {
-
-    //}
 }
