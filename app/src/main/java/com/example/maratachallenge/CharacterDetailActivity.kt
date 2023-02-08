@@ -20,16 +20,15 @@ class CharacterDetailActivity : AppCompatActivity() {
         val urlHomeWorld = character!!.homeworld
         val urlSpecie = character!!.specie
         if(character != null) {
-            val name : TextView = findViewById(R.id.detailActivityName)
-            val height : TextView = findViewById(R.id.detailActivityHeight)
-            val mass : TextView = findViewById(R.id.detailActivityMass)
-            val hairColor : TextView = findViewById(R.id.detailActivityHairColor)
-            val skinColor : TextView = findViewById(R.id.detailActivitySkinColor)
-            val eyeColor : TextView = findViewById(R.id.detailActivityEyeColor)
-            val birthYear : TextView = findViewById(R.id.detailActivityBirthYear)
-            val gender : TextView = findViewById(R.id.detailActivityGender)
-            val homeWorld : TextView = findViewById(R.id.detailActivityHomeWorld)
-            val specie : TextView = findViewById(R.id.detailActivitySpecie)
+            val name : TextView = findViewById(R.id.textViewFullNameValue)
+            val height : TextView = findViewById(R.id.textViewHeightValue)
+            val mass : TextView = findViewById(R.id.textViewMassValue)
+            val hairColor : TextView = findViewById(R.id.textViewHairColorValue)
+            val skinColor : TextView = findViewById(R.id.textViewSkinColorValue)
+            val eyeColor : TextView = findViewById(R.id.textViewEyeColorValue)
+            val birthYear : TextView = findViewById(R.id.textViewBirthYearValue)
+            val gender : TextView = findViewById(R.id.textViewGenderValue)
+            val homeWorld : TextView = findViewById(R.id.textViewHomeWorldValue)
 
             // Requisição da Home World
             val jsonObjectRequestHomeWorld = JsonObjectRequest(

@@ -30,15 +30,9 @@ class CharacterListAdapter(): RecyclerView.Adapter<CharacterViewHolder>() {
         holder.genderView.text = "gender: " + currentItem.gender
         holder.massView.text = "mass: " + currentItem.mass + " pounds"
 
-        //Fill favorite attribute
-        holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                currentItem.isFavorite = true
-                notifyDataSetChanged()
-            } else {
-                currentItem.isFavorite = false
-                notifyDataSetChanged()
-            }
+        holder.checkBox.isChecked = currentItem.isFavorite ?: false
+        holder.checkBox.setOnCheckedChangeListener{_, isChecked ->
+            currentItem.isFavorite = isChecked
         }
 
         //Send info to other Activity
