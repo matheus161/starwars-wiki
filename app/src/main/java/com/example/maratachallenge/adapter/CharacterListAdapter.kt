@@ -1,7 +1,6 @@
 package com.example.maratachallenge
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,12 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.maratachallenge.activity.CharacterDetailActivity
+import com.example.maratachallenge.model.Character
 
 class CharacterListAdapter(): RecyclerView.Adapter<CharacterViewHolder>() {
 
-    private val items: ArrayList<com.example.maratachallenge.Character> = ArrayList()
+    private val items: ArrayList<Character> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val view = LayoutInflater

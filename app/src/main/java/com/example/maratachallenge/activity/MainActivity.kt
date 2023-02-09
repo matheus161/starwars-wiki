@@ -1,19 +1,20 @@
-package com.example.maratachallenge
+package com.example.maratachallenge.activity
 
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
 import androidx.appcompat.widget.SearchView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.example.maratachallenge.CharacterListAdapter
+import com.example.maratachallenge.MySingleton
+import com.example.maratachallenge.R
+import com.example.maratachallenge.model.Character
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val searchList = ArrayList<com.example.maratachallenge.Character>()
+                val searchList = ArrayList<Character>()
                 val searchText = newText!!.toLowerCase(Locale.getDefault())
 
                 if (newText != null) {
@@ -58,11 +59,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     if (searchList.isEmpty()) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Nenhum nome correspondente foi encontrado",
-                            Toast.LENGTH_LONG
-                        ).show()
                         searchList.clear()
                         mAdapter.updateCharacter(searchList)
                     } else {
@@ -109,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                 val characterJsonArray = it.getJSONArray("results")
                 for (i in 0 until characterJsonArray.length()) {
                     val charactersJsonObject = characterJsonArray.getJSONObject(i)
-                    val character = com.example.maratachallenge.Character(
+                    val character = Character(
                         charactersJsonObject.getString("name"),
                         charactersJsonObject.getString("height"),
                         charactersJsonObject.getString("mass"),

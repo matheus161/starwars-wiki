@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activity.MainActivity"
     android:id="@+id/constraint_layout">
 
     <androidx.cardview.widget.CardView
@@ -24,6 +24,7 @@
             android:background="@drawable/searchbar_backgroud"
             app:queryHint="Type Your Character Name..."
             app:iconifiedByDefault="false"
+            style="@style/SearchViewStyle"
             android:textColorHint="@color/light_gray" />
     </androidx.cardview.widget.CardView>
 

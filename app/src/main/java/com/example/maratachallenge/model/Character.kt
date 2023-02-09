@@ -1,4 +1,4 @@
-package com.example.maratachallenge
+package com.example.maratachallenge.model
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -1,16 +1,18 @@
-package com.example.maratachallenge
+package com.example.maratachallenge.activity
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.example.maratachallenge.MySingleton
+import com.example.maratachallenge.R
+import com.example.maratachallenge.model.Character
 
 class CharacterDetailActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -21,7 +23,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#00FFFFFF")))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val character = intent.getParcelableExtra<com.example.maratachallenge.Character>("character")
+        val character = intent.getParcelableExtra<Character>("character")
         val urlHomeWorld = character!!.homeworld
         val urlSpecie = character!!.specie
         if(character != null) {

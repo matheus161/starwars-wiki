@@ -1,25 +1,24 @@
-package com.example.maratachallenge
+package com.example.maratachallenge.activity
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
+import com.example.maratachallenge.CharacterListAdapter
+import com.example.maratachallenge.R
+import com.example.maratachallenge.model.Character
 import java.util.*
 import kotlin.collections.ArrayList
 
 class FavoriteCharacterActicity : AppCompatActivity() {
 
     private lateinit var mAdapter: CharacterListAdapter
-    var characterArray = ArrayList<com.example.maratachallenge.Character>()
+    var characterArray = ArrayList<Character>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +30,7 @@ class FavoriteCharacterActicity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.rv_characteres)
         val layoutManager = LinearLayoutManager(this)
         val searchView = findViewById<SearchView>(R.id.search)
-        characterArray = intent.getParcelableArrayListExtra<com.example.maratachallenge.Character>("characterArray") as ArrayList<Character>
+        characterArray = intent.getParcelableArrayListExtra<Character>("characterArray") as ArrayList<Character>
 
 
         recyclerView.layoutManager = layoutManager
@@ -45,7 +44,7 @@ class FavoriteCharacterActicity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val searchList = ArrayList<com.example.maratachallenge.Character>()
+                val searchList = ArrayList<Character>()
                 val searchText = newText!!.toLowerCase(Locale.getDefault())
 
                 if (newText != null) {
